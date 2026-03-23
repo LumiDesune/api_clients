@@ -5,6 +5,7 @@ import { routes } from "./routes.js";
 // Criando a instância da aplicação
 const app = Fastify({ logger: true });
 
+// Iniciando o servidor
 const start = async () => {
 
     await app.register(cors);
