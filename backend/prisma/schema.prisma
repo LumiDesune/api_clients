@@ -9,6 +9,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
+  url = env("DATABASE_URL")
 }
 
 // Modelo de usuário para o MongoDB
@@ -17,7 +18,7 @@ model User {
   name String
   email String 
   status Boolean
-  createdAt DateTime @default(now()) 
+  createdAt DateTime? @default(now()) 
 
   @@map("users") // Mapeia para a coleção "users" no MongoDB
 }
