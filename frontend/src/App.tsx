@@ -1,3 +1,5 @@
+import { FiTrash } from 'react-icons/fi'
+
 export default function App() {
   return (
 
@@ -34,11 +36,19 @@ export default function App() {
           Registred users
         </h2>
 
-        <section className="flex flex-col">
+        <section className="flex flex-col relative hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+
           <article className="w-full bg-white p-2 rounded-md">
             <p><span className="font-bold">Nome: </span>Aurora</p>
             <p><span className="font-bold">Email: </span>aurora@exemplo.com</p>
             <p><span className="font-bold">Status: </span><span className="text-green-500 font-bold">ATIVO</span></p>
+
+            <button 
+              className="bg-red-500 flex items-center justify-center w-7 h-7 rounded-lg absolute right-0 -top-2"
+            >
+              <FiTrash size={18} color='#FFF'/>
+            </button>
+
           </article>
         </section>
 
