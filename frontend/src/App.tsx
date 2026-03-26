@@ -33,19 +33,43 @@ export default function App() {
     const name = nameInputRef.current?.value;
     const email = emailInputRef.current?.value;
 
-    if (!name || !email) return;
+    if (!name || !email){
+      alert("Name and email are required!");
+      return;
+    }
 
+    // Envia os dados do novo usuário para a API
     const response = await api.post("/users", {
       name: name,
       email: email
     });
 
+    // Limpar campos do formulário após o envio
+    if(nameInputRef.current) nameInputRef.current.value = "";
+    if(emailInputRef.current) emailInputRef.current.value = "";
+
+    setUsers([...users, response.data]); // Atualiza o estado com o novo usuário adicionado
+
+  }
+
+  // Função para excluir um usuário
+  async function handleDeleteUser(userId: string) {
+    try {
+
+      await api.delete(`/users/${userId}`);
+
+      // Remove o usuário da lista após delete bem-sucedido
+      setUsers(users.filter(user => user.id !== userId));
+
+    } catch (error){
+      console.error("Error deleting user:", error);
+    }
   }
 
   return (
     /* Section com o formulário de registro de usuários */
     <div className="w-full min-h-screen bg-gray-700 flex justify-center px-4">
-      <main className="my-10 w-full md:max-w-2xl">
+      <main className="my-10 w-full md:max-w-2xl bg-purple-700 p-6 rounded-md">
         <h1 className="text-4xl font-semibold text-white text-center">
           Users registration
         </h1>
@@ -70,8 +94,8 @@ export default function App() {
 
           <input
             type="submit"
-            value="Registrar"
-            className="cursor-pointer w-full bg-blue-500 p-3 font-semibold text-white rounded-md hover:bg-blue-700 transition-colors"
+            value="Cadastrar"
+            className="cursor-pointer w-full bg-blue-500 p-3 font-semibold text-white rounded-md hover:bg-blue-600 transition-colors"
           />
         </form>
 
@@ -98,8 +122,11 @@ export default function App() {
                 </span>
               </p>
 
-              <button className="bg-red-500 flex items-center justify-center w-7 h-7 rounded-lg absolute right-0 -top-2">
-                <FiTrash size={18} color="#FFF" />
+              <button 
+              className="bg-red-500 flex items-center justify-center w-7 h-7 rounded-lg absolute right-0 -top-2 hover:bg-red-600 transition-colors"
+              onClick={() => handleDeleteUser(user.id)}
+              >
+                <FiTrash size={18} color="#FFF"/>
               </button>
             </article>
           ))}

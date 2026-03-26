@@ -6,7 +6,11 @@ import { routes } from "./routes.js";
 const app = Fastify({ logger: true });
 
 // Registrando plugins da aplicação
-await app.register(cors);
+await app.register(cors, {
+    origin: "*",
+    methods: ["GET", "POST", "DELETE"]
+});
+
 await app.register(routes);
 
 // Middleware para lidar com erros

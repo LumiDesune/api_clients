@@ -26,7 +26,7 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
     // Rotas - DELETE
 
     // Criando rota para deletar usuário
-    fastify.delete("/users", async (request: FastifyRequest, reply: FastifyReply) => {
+    fastify.delete("/users/:id", async (request: FastifyRequest, reply: FastifyReply) => {
         return new DeleteUserController().handle(request, reply);
     })
 
