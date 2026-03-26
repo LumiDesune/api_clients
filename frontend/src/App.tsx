@@ -70,7 +70,7 @@ export default function App() {
     /* Section com o formulário de registro de usuários */
     <div className="w-full min-h-screen bg-gray-700 flex justify-center px-4">
       <main className="my-10 w-full md:max-w-2xl bg-purple-700 p-6 rounded-md">
-        <h1 className="text-4xl font-semibold text-white text-center">
+        <h1 className="text-4xl font-bold text-white text-center">
           Users registration
         </h1>
 
